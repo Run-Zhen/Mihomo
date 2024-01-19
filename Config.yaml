@@ -1,0 +1,560 @@
+# ErdongChan-LazyConf
+# Update:2022.5
+# ------------------
+# YouTube：https://i.erdon.cc/yt
+# Telegram：https://t.me/erdongchan
+# 图标库：https://github.com/erdongchanyo/icon
+# ------------------
+# 下载配置后，需要自行添加机场订阅链接
+# 找到 #远程订阅(代理集合) 部分，将 MyProxy 部分的 url 链接地址更换为自己的机场订阅链接
+# 此处推荐使用Sub-Store订阅链接，多机场用户可以将多个机场订阅整合为一个 Sub-Store 订阅
+
+mixed-port: 7890
+allow-lan: true
+bind-address: '*'
+mode: Rule
+log-level: silent
+external-controller: 127.0.0.1:9090
+
+#DNS设置
+dns:
+  enable: true
+  listen: 0.0.0.0:53
+  #DNS服务器
+  default-nameserver:
+    - 119.29.29.29
+    - 119.28.28.28
+    - 223.5.5.5
+    - 114.114.114.114
+  #DoH服务器
+  nameserver:
+    - https://dns.alidns.com/dns-query
+    - https://doh.dns.sb/dns-query
+  enhanced-mode: fake-ip
+  fake-ip-range: 198.18.0.1/16
+  #列表中的域名将不会被解析为fake ip，这些域名相关的解析请求将会返回它们真实的IP地址
+  fake-ip-filter:
+    - '*.lan'
+    - localhost.ptlogin2.qq.com
+    - '+.srv.nintendo.net'
+    - '+.stun.playstation.net'
+    - '+.msftconnecttest.com'
+    - '+.msftncsi.com'
+    - '+.xboxlive.com'
+    - 'msftconnecttest.com'
+    - 'xbox.*.microsoft.com'
+    - '*.battlenet.com.cn'
+    - '*.battlenet.com'
+    - '*.blzstatic.cn'
+    - '*.battle.net'
+
+#本地代理
+#proxies:
+proxies:
+  - {name: California, server: 54.193.52.89, port: 21059, type: ss, cipher: aes-256-gcm, password: VTlkWThDeXdhU2xYcTk5ZnV2NTRMTmhqZ1V1R3NhR3RxMU1RaW1QdDkwSkgwWmpKeUdhcm1nS2xtbHE2YVhRQg==}
+  - {name: Fremont, server: 45.79.111.169, port: 51856, type: ss, cipher: aes-256-gcm, password: WDZjM044UE1hcGpic2ZhZEdVUks0ejFCaHJMa0JDaXhrNHlFZVRld0JYVGxVU01VYXhUcUc3aWo4SmN2aW1ZUA==}
+
+#远程订阅(代理集合)
+proxy-providers:
+
+  MyProxy: &MyProxy #建立锚点
+     #多机场用户请使用Sub-Store生成自己的订阅地址并替换以下url地址
+    type: http
+    url: https://gist.githubusercontent.com/Run-Zhen/c897ba1eaff056c8fda65243fae3fdcb/raw/CSRETON-C
+    path: ./provider.yaml
+    health-check:
+      enable: true
+      interval: 87531
+      url: http://cp.cloudflare.com/generate_204
+   
+  #台湾节点
+  MyProxy-Taiwan:
+    <<: *MyProxy #引用锚点内容
+    filter: "台|台湾|TW|Taiwan"
+    path: ./provider.yaml
+    proxies:
+  
+  #香港节点
+  MyProxy-Hong Kong:
+    <<: *MyProxy #引用锚点内容
+    filter: "HK|香港|港|\U0001F1ED\U0001F1F0|Hongkong|HongKong"
+    path: ./provider.yaml
+    proxies:
+  
+  #美国节点
+  MyProxy-United States:
+    <<: *MyProxy #引用锚点内容
+    filter: "美|美国|\U0001F1FA\U0001F1F8|US|us|United States"
+    path: ./provider.yaml
+    proxies:
+  
+  #新加坡节点
+  MyProxy-Singapore:
+    <<: *MyProxy #引用锚点内容
+    filter: "城|新|新加坡|\U0001F1F8\U0001F1EC|SG|Singapore"
+    path: ./provider.yaml
+    proxies:
+  
+  #日本节点
+  MyProxy-Japan:
+    <<: *MyProxy #引用锚点内容
+    filter: "日|日本|东京|\U0001F1EF\U0001F1F5|JP|Japan"
+    path: ./provider.yaml
+    proxies:
+  
+#策略组
+proxy-groups:
+
+- name: 📡 Proxy
+  icon: https://fastly.jsdelivr.net/gh/Koolson/Qure/IconSet/Color/Daily.png
+  type: select
+  proxies:
+  - 🛰️ Relay
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  use:
+    - MyProxy
+
+- name: 🛰️ Relay
+  type: relay
+  proxies:
+    - ⚛ Relay-Region
+    - 🚁 Relay-Server
+    
+- name: ⚛ Relay-Region
+  type: select
+  proxies:
+    - 🇹🇼 Taiwan
+    - 🇭🇰 Hong Kong
+    - 🇺🇸 United States
+    - 🇸🇬 Singapore
+    - 🇯🇵 Japan
+    - DIRECT
+
+- name: 🚁 Relay-Server
+  type: select
+  proxies:
+    - California
+    - Fremont
+
+- name: 🇹🇼 Taiwan
+  type: select
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Country/TW02.png
+  use:
+    - MyProxy-Taiwan
+
+- name: 🇺🇸 United States
+  type: select
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Country/US.png
+  use:
+    - MyProxy-United States
+
+- name: 🇭🇰 Hong Kong
+  type: select
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Country/HK02.png
+  use:
+    - MyProxy-Hong Kong
+
+- name: 🇸🇬 Singapore
+  type: select
+  icon: https://www.emojiall.com/images/240/google/1f1f8-1f1ec.png
+  use:
+    - MyProxy-Singapore
+
+- name: 🇯🇵 Japan
+  type: select
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Country/JP.png
+  use:
+    - MyProxy-Japan
+
+- name: 🎓 Scholar
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+
+- name: 🎶 NECM
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+
+- name: 🔎 Google
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  icon: https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
+
+- name: 🎧 Apple
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Filter/Apple.png
+
+- name: 🖥️ Microsoft
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Filter/Microsoft.png
+
+- name: 📬 Telegram
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Filter/Telegram.png
+
+- name: ⛽ Youtube
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Filter/Youtube.png
+
+- name: 💱 PayPal
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Filter/Paypal.png
+
+- name: 🎦 Netflix
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Filter/Netflix.png
+
+- name: 🧸 Disney+
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Filter/Disney+.png
+
+- name: 📺 HBO
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Filter/HBO.png
+
+- name: 🎵 Spotify
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Filter/Spotify.png
+
+- name: 🕊️ Twitter
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Filter/Twitter.png
+
+- name: 🛰️ GlobalMedia
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Filter/GMedia.png
+
+- name: 🌐 Global
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Filter/Outside.png
+
+- name: 🇨🇳 MainLand
+  type: select
+  proxies:
+  - 📡 Proxy
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Filter/Mainland.png
+
+- name: ♾️ Final
+  type: select
+  proxies:
+  - 🇹🇼 Taiwan
+  - 🇭🇰 Hong Kong
+  - 🇺🇸 United States
+  - 🇸🇬 Singapore
+  - 🇯🇵 Japan
+  - DIRECT
+  - 📡 Proxy
+  icon: https://raw.githubusercontent.com/erdongchanyo/icon/main/Policy-Filter/Final01.png
+
+#远程规则集合声明
+# 对应的配置文件
+rule-providers:
+  Scholar:
+    type: http
+    behavior: classical
+    path: ./RuleSet/Scholar.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Scholar/Scholar.yaml
+    interval: 87531
+  
+  NECM:
+    type: http
+    behavior: classical
+    path: ./RuleSet/NECM.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/NetEaseMusic/NetEaseMusic.yaml
+    interval: 87531
+  
+  Google:
+    type: http
+    behavior: classical
+    path: ./RuleSet/Google.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml
+    interval: 87531
+  
+  Apple:
+    type: http
+    behavior: classical
+    path: ./RuleSet/Apple.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple.yaml
+    interval: 87531
+  
+  Microsoft:
+    type: http
+    behavior: classical
+    path: ./RuleSet/Microsoft.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Microsoft/Microsoft.yaml
+    interval: 87531
+
+  Telegram:
+    type: http
+    behavior: classical
+    path: ./RuleSet/Telegram.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml
+    interval: 87531
+  
+  YouTube:
+    type: http
+    behavior: classical
+    path: ./RuleSet/YouTube.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTube/YouTube.yaml
+    interval: 87531
+
+  PayPal:
+    type: http
+    behavior: classical
+    path: ./RuleSet/PayPal.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/PayPal/PayPal.yaml
+    interval: 87531
+  
+  Netflix:
+    type: http
+    behavior: classical
+    path: ./RuleSet/Netflix.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Netflix/Netflix.yaml
+    interval: 87531
+  
+  Disney+:
+    type: http
+    behavior: classical
+    path: ./RuleSet/Disney+.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Disney/Disney.yaml
+    interval: 87531
+  
+  HBO:
+    type: http
+    behavior: classical
+    path: ./RuleSet/HBO.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/HBO/HBO.yaml
+    interval: 87531
+  
+  Spotify:
+    type: http
+    behavior: classical
+    path: ./RuleSet/Spotify.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Spotify/Spotify.yaml
+    interval: 87531
+
+  Twitter:
+    type: http
+    behavior: classical
+    path: ./RuleSet/Twitter.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Twitter/Twitter.yaml
+    interval: 87531
+  
+  GlobalMedia:
+    type: http
+    behavior: classical
+    path: ./RuleSet/GlobalMedia.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GlobalMedia/GlobalMedia.yaml
+    interval: 87531
+
+  Global:
+    type: http
+    behavior: classical
+    path: ./RuleSet/Global.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Global/Global.yaml
+    interval: 87531
+
+  China:
+    type: http
+    behavior: classical
+    path: ./RuleSet/China.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/China/China.yaml
+    interval: 87531
+  
+  China_Classical:
+    type: http
+    behavior: domain
+    path: ./RuleSet/China_Classical.yaml
+    url: https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/China/China_Classical.yaml
+    interval: 87531
+
+  Applications:
+    type: http
+    behavior: classical
+    url: "https://ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/applications.txt"
+    path: ./ruleset/applications.yaml
+    interval: 87531
+
+  SteamCN:
+    type: http
+    behavior: classical
+    url: 'https://ghproxy.com/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN.yaml'
+    path: ./ruleset/steamCN.yaml
+    interval: 87531
+  
+  Direct:
+    type: http
+    behavior: domain
+    url: "https://ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/direct.txt"
+    path: ./ruleset/direct.yaml
+    interval: 87531
+  
+  Lancidr:
+    type: http
+    behavior: ipcidr
+    url: "https://ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/lancidr.txt"
+    path: ./ruleset/lancidr.yaml
+    interval: 87531
+  
+  Cncidr:
+    type: http
+    behavior: ipcidr
+    url: "https://ghproxy.com/https://raw.githubusercontent.com/Loyalsoldier/clash-rules/release/cncidr.txt"
+    path: ./ruleset/cncidr.yaml
+    interval: 87531
+
+rules:
+  - RULE-SET,Direct,DIRECT
+  - DOMAIN,clash.razord.top,DIRECT
+  - DOMAIN,yacd.haishan.me,DIRECT
+  - RULE-SET,Scholar,🎓 Scholar
+  - RULE-SET,NECM,🎶 NECM
+  - RULE-SET,Google,🔎 Google
+  - RULE-SET,Apple,🎧 Apple
+  - RULE-SET,Microsoft,🖥️ Microsoft
+  - RULE-SET,Telegram,📬 Telegram
+  - RULE-SET,YouTube,⛽ Youtube
+  - RULE-SET,PayPal,💱 PayPal
+  - RULE-SET,Netflix,🎦 Netflix
+  - RULE-SET,Disney+,🧸 Disney+
+  - RULE-SET,HBO,📺 HBO
+  - RULE-SET,Spotify,🎵 Spotify
+  - RULE-SET,Twitter,🕊️ Twitter
+  - RULE-SET,GlobalMedia,🛰️ GlobalMedia
+  - RULE-SET,Global,🌐 Global
+  - RULE-SET,China,DIRECT
+  - RULE-SET,China_Classical,DIRECT
+  - RULE-SET,Applications,DIRECT
+  - RULE-SET,SteamCN,DIRECT
+  - RULE-SET,Lancidr,DIRECT,no-resolve
+  - RULE-SET,Cncidr,DIRECT
+  - GEOIP,LAN,DIRECT,no-resolve
+  - GEOIP,CN,DIRECT
+  - MATCH,♾️ Final
