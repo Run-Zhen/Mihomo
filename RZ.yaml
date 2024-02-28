@@ -1,0 +1,183 @@
+port: 7890
+socks-port: 7891
+allow-lan: true
+mode: Rule
+log-level: info
+external-controller: :9090
+external-ui: ui
+proxy-providers:
+	🏮 RZ:
+    type: http
+    path: ./profiles/RZ.yaml
+    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo"
+    interval: 3600
+    filter: ''
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+	🇭🇰 Hong Kong:
+    type: http
+    path: ./profiles/Hong Kong.yaml
+    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo"
+    interval: 3600
+    filter: 'hk|HK|HongKong|Hong Kong|香港|港'
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+	🇹🇼 Taiwan:
+    type: http
+    path: ./profiles/Taiwan.yaml
+    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo"
+    interval: 3600
+    filter: 'tw|TW|TaiWan|Taiwan|台湾|台'
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+	🇺🇸 United States:
+    type: http
+    path: ./profiles/United States.yaml
+    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo"
+    interval: 3600
+    filter: 'us|US|United States|美国|美'
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+	🇸🇬 Singapore:
+    type: http
+    path: ./profiles/Singapore.yaml
+    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo"
+    interval: 3600
+    filter: 'sg|SG|Singapore|新加坡|坡'
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+	🇯🇵 Japan:
+    type: http
+    path: ./profiles/Japan.yaml
+    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo"
+    interval: 3600
+    filter: 'jp|JP|Japan|日本'
+    health-check:
+      enable: true
+      url: http://www.gstatic.com/generate_204
+      interval: 300
+proxy-groups:
+  - name: 🎡 Proxy
+    type: select
+	use:
+      - 🇭🇰 Hong Kong
+      - 🇹🇼 Taiwan
+	  - 🇺🇸 United States
+	  - 🇸🇬 Singapore
+	  - 🇯🇵 Japan
+    proxies:
+      - DIRECT
+  - name: ♾️ Subscribers
+    type: select
+    use:
+	  - 🏮 RZ
+  - name: 🔚 Final
+    type: select
+	use:
+      - 🇭🇰 Hong Kong
+      - 🇹🇼 Taiwan
+	  - 🇺🇸 United States
+	  - 🇸🇬 Singapore
+	  - 🇯🇵 Japan
+    proxies:
+	  - 🎡 Proxy
+	  - ♾️ Subscribers
+	  - DIRECT
+rule-providers:
+  Google:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Google/Google.yaml"
+    path: ./ruleset/Google.yaml
+    interval: 86400
+  GitHub:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/GitHub/GitHub.yaml"
+    path: ./ruleset/GitHub.yaml
+    interval: 86400
+  YouTube:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/YouTube/YouTube.yaml"
+    path: ./ruleset/YouTube.yaml
+    interval: 86400
+  Telegram:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Telegram/Telegram.yaml"
+    path: ./ruleset/Telegram.yaml
+    interval: 86400
+  Apple:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Apple/Apple_Classical.yaml"
+    path: ./ruleset/Apple.yaml
+    interval: 86400
+  TLD-Not-CN:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/tld-not-cn.txt"
+    path: ./ruleset/TLD-Not-CN.yaml
+    interval: 86400
+  Proxy_Domain:
+    type: http
+    behavior: classical
+    url: "https://cdn.jsdelivr.net/gh/blackmatrix7/ios_rule_script@master/rule/Clash/Proxy/Proxy_Classical.yaml"
+    path: ./ruleset/proxy_domain.yaml
+    interval: 86400
+  GFW_List:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/gfw.txt"
+    path: ./ruleset/GFW_List.yaml
+    interval: 86400
+  Direct_Domain:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/direct.txt"
+    path: ./ruleset/Direct_Domain.yaml
+    interval: 86400
+  Private:
+    type: http
+    behavior: domain
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/private.txt"
+    path: ./ruleset/Private.yaml
+    interval: 86400
+  Lan_Cidr:
+     type: http
+     behavior: ipcidr
+     url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/lancidr.txt"
+     path: ./ruleset/Lan_Cidr.yaml
+     interval: 86400
+  CN_Cidr:
+    type: http
+    behavior: ipcidr
+    url: "https://cdn.jsdelivr.net/gh/Loyalsoldier/clash-rules@release/cncidr.txt"
+    path: ./ruleset/CN_Cidr.yaml
+    interval: 86400
+rules:
+  - RULE-SET,Google,🎡 Proxy
+  - RULE-SET,GitHub,♾️ Subscribers
+  - RULE-SET,YouTube,🎡 Proxy
+  - RULE-SET,Telegram,♾️ Subscribers
+  - RULE-SET,Apple,DIRECT
+  - RULE-SET,TLD-Not-CN,🎡 Proxy
+  - RULE-SET,Proxy_Domain,🎡 Proxy
+  - RULE-SET,GFW_List,🎡 Proxy
+  - RULE-SET,Direct_Domain,DIRECT
+  - RULE-SET,private,DIRECT
+  - RULE-SET,Lan_Cidr,DIRECT
+  - RULE-SET,CN_Cidr,DIRECT
+  - GEOIP,CN,DIRECT
+  - MATCH,🎡 Proxy
