@@ -6,15 +6,6 @@ log-level: info
 external-controller: :9090
 external-ui: ui
 proxy-groups:
-  - name: 🎡 Proxy
-    type: select
-    proxies:
-      - 🇭🇰 Hong Kong
-	  - 🇹🇼 Taiwan
-	  - 🇺🇸 United States
-	  - 🇸🇬 Singapore
-	  - 🇭🇰 Hong Kong
-	  - DIRECT
   - name: 🇭🇰 Hong Kong
     type: select
 	proxies: []
@@ -33,6 +24,15 @@ proxy-groups:
   - name: 🏮 RZ
     type: select
 	proxies: []
+  - name: 🎡 Proxy
+    type: select
+    proxies:
+      - 🇭🇰 Hong Kong
+	  - 🇹🇼 Taiwan
+	  - 🇺🇸 United States
+	  - 🇸🇬 Singapore
+	  - 🇭🇰 Hong Kong
+	  - DIRECT
   - name: ♾️ Subscribers
     type: select
     proxies:
