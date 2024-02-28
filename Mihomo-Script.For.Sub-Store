@@ -3,30 +3,5 @@
     group: "🇭🇰 Hong Kong",
     url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo",
     inclusion: ["hk", "HK", "Hong Kong","HongKong","香港","港"]
-  },
-  {
-    group: "🇹🇼 Taiwan",
-    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo",
-    inclusion: ["tw", "TW", "Taiwan","TaiWan","台湾","台"]
-  },
-  {
-    group: "🇺🇸 United States",
-    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo",
-    inclusion: ["us", "US", "United States","UnitedStates","美国","美"," California"]
-  },
-   {
-    group: "🇸🇬 Singapore",
-    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo",
-    inclusion: ["sg", "SG", "Singapore","新加坡", "坡"]
-  },
-  {
-    group: "🇯🇵 Japan",
-    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo",
-    inclusion: ["jp", "JP", "Japan","日本"]
-  },
-  {
-    group: "🏮 RZ",
-    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo",
-    exclusion: [""]
   }
 ]
