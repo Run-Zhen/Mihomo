@@ -1,44 +1,44 @@
 [
   {
-    name: "RZ", # 网站名称，仅用于日志输出
-    group: "🏮 RZ", # 目标 proxy-groups 的代理组名
-    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo", # Clash 配置文件的订阅 URL
-    exclusion: [""], # 节点名称或地址包含这些关键词的节点会被丢弃
-    dedup: False # 是否基于节点入口 IP 地址进行去重
+    name: "RZ",
+    group: "🏮 RZ",
+    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo",
+    exclusion: [""],
+    dedup: False
   },
   {
-    name: "Hong Kong", # 网站名称，仅用于日志输出
-    group: "🇭🇰 Hong Kong", # 目标 proxy-groups 的代理组名
-    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo", # Clash 配置文件的订阅 URL
-    inclusion: ["hk", "HK", "Hong Kong","HongKong","香港","港"], # 仅采纳包含这些关键词的节点
-    dedup: False # 是否基于节点入口 IP 地址进行去重
+    name: "Hong Kong",
+    group: "🇭🇰 Hong Kong",
+    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo",
+    inclusion: ["hk", "HK", "Hong Kong","HongKong","香港","港"],
+    dedup: False
   },
   {
-    name: "Taiwan", # 网站名称，仅用于日志输出
-    group: "🇹🇼 Taiwan", # 目标 proxy-groups 的代理组名
-    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo", # Clash 配置文件的订阅 URL
-    inclusion: ["tw", "TW", "Taiwan","TaiWan","台湾","台",], # 仅采纳包含这些关键词的节点
-    dedup: False # 是否基于节点入口 IP 地址进行去重
+    name: "Taiwan",
+    group: "🇹🇼 Taiwan",
+    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo",
+    inclusion: ["tw", "TW", "Taiwan","TaiWan","台湾","台",],
+    dedup: False
   },
   {
-    name: "United States", # 网站名称，仅用于日志输出
-    group: "🇺🇸 United States", # 目标 proxy-groups 的代理组名
-    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo", # Clash 配置文件的订阅 URL
-    inclusion: ["us", "US", "United States","UnitedStates","美国","美"," California"], # 仅采纳包含这些关键词的节点
-    dedup: False # 是否基于节点入口 IP 地址进行去重
+    name: "United States",
+    group: "🇺🇸 United States",
+    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo",
+    inclusion: ["us", "US", "United States","UnitedStates","美国","美"," California"],
+    dedup: False
   },
    {
-    name: "Singapore", # 网站名称，仅用于日志输出
-    group: "🇸🇬 Singapore", # 目标 proxy-groups 的代理组名
-    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo", # Clash 配置文件的订阅 URL
-    inclusion: ["sg", "SG", "Singapore","新加坡", "坡"], # 仅采纳包含这些关键词的节点
-    dedup: False # 是否基于节点入口 IP 地址进行去重
+    name: "Singapore",
+    group: "🇸🇬 Singapore",
+    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo",
+    inclusion: ["sg", "SG", "Singapore","新加坡", "坡"],
+    dedup: False
   },
   {
-    name: "Japan", # 网站名称，仅用于日志输出
-    group: "🇯🇵 Japan", # 目标 proxy-groups 的代理组名
-    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo", # Clash 配置文件的订阅 URL
-    inclusion: ["jp", "JP", "Japan","日本"], # 仅采纳包含这些关键词的节点
-    dedup: False # 是否基于节点入口 IP 地址进行去重
+    name: "Japan",
+    group: "🇯🇵 Japan",
+    url: "https://gist.githubusercontent.com/Run-Zhen/071bd968c0a68a4503af434435f61e35/raw/RZ-Mihomo",
+    inclusion: ["jp", "JP", "Japan","日本"],
+    dedup: False
   }
 ]
