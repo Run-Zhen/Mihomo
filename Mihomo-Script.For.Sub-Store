@@ -7,36 +7,36 @@ let clashMetaProxies = await produceArtifact({
 }))
 
 // 先将全部节点结构插到 outbounds
-config.proxies.push(...proxies)
+config.outbounds.push(...proxies)
 
-config.proxies.map(i => {
+config.outbounds.map(i => {
   // 在 全部节点 中插入全部节点名
   if (['🎡 Proxy'].includes(i.tag)) {
-    i.proxies.push(...proxies.map(p => p.tag))
+    i.outbounds.push(...proxies.map(p => p.tag))
   }
   
   if (['🇭🇰 Hong Kong'].includes(i.tag)) {
-    i.proxies.push(...proxies.filter(p => /hk|HK|🇭🇰|hongkong|HongKong|hong kong|Hong Kong|香港|港/i.test(p.tag)).map(p => p.tag))
+    i.outbounds.push(...proxies.filter(p => /hk|HK|🇭🇰|hongkong|HongKong|hong kong|Hong Kong|香港|港/i.test(p.tag)).map(p => p.tag))
   }
   
   if (['🇹🇼 Taiwan'].includes(i.tag)) {
-    i.proxies.push(...proxies.filter(p => /tw|TW|🇹🇼|Taiwan|TaiWan|台湾|台/i.test(p.tag)).map(p => p.tag))
+    i.outbounds.push(...proxies.filter(p => /tw|TW|🇹🇼|Taiwan|TaiWan|台湾|台/i.test(p.tag)).map(p => p.tag))
   }
   // 在 美国节点 中插入全部美国节点名
   if (['🇺🇸 United States'].includes(i.tag)) {
-    i.proxies.push(...proxies.filter(p => /us|US|🇺🇸|united states|United States|美国|美/i.test(p.tag)).map(p => p.tag))
+    i.outbounds.push(...proxies.filter(p => /us|US|🇺🇸|united states|United States|美国|美/i.test(p.tag)).map(p => p.tag))
   }
   
   if (['🇸🇬 Singapore'].includes(i.tag)) {
-    i.proxies.push(...proxies.filter(p => /sg|SG|🇸🇬|Singapore|新加坡|坡/i.test(p.tag)).map(p => p.tag))
+    i.outbounds.push(...proxies.filter(p => /sg|SG|🇸🇬|Singapore|新加坡|坡/i.test(p.tag)).map(p => p.tag))
   }
   
   if (['🇯🇵 Japan'].includes(i.tag)) {
-  i.proxies.push(...proxies.filter(p => /jp|JP|🇯🇵|Japan|日本/i.test(p.tag)).map(p => p.tag))
+  i.outbounds.push(...proxies.filter(p => /jp|JP|🇯🇵|Japan|日本/i.test(p.tag)).map(p => p.tag))
   }
   
   if (['🏮 RZ'].includes(i.tag)) {
-    i.proxies.push(...proxies.filter(p => / /i.test(p.tag)).map(p => p.tag))
+    i.outbounds.push(...proxies.filter(p => / /i.test(p.tag)).map(p => p.tag))
   }
 })
 
