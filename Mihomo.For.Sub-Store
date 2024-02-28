@@ -9,39 +9,14 @@ proxy-groups:
   - name: 🇭🇰 Hong Kong
     type: select
 	proxies: []
-  - name: 🇹🇼 Taiwan
-    type: select
-	proxies: []
-  - name: 🇺🇸 United States
-    type: select
-	proxies: []
-  - name: 🇸🇬 Singapore
-    type: select
-	proxies: []
-  - name: 🇯🇵 Japan
-    type: select
-	proxies: []
-  - name: 🏮 RZ
-    type: select
-	proxies: []
   - name: 🎡 Proxy
     type: select
     proxies:
       - 🇭🇰 Hong Kong
-	  - 🇹🇼 Taiwan
-	  - 🇺🇸 United States
-	  - 🇸🇬 Singapore
-	  - 🇭🇰 Hong Kong
-	  - DIRECT
-  - name: ♾️ Subscribers
-    type: select
-    proxies:
-      - 🏮 RZ
   - name: 🔚 Final
     type: select
     proxies:
 	  - 🎡 Proxy
-	  - ♾️ Subscribers
 	  - DIRECT
 rule-providers:
   Google:
